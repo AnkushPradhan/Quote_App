@@ -1,1 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quotes</title>
+    <style>
+      body {
+        margin: 0%;
+        font-family: "Times New Roman", Times, serif;
+      }
+      #quotes {
+        /* background-color: aqua; */
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding: 50px;
+      }
+      .heading > h1 {
+        color: #2107c3;
+        text-align: center;
+        font-size: 48px;
+        margin-bottom: 10px;
+        cursor: pointer;
+      }
+      .card {
+        background-color: #cfeaf2;
+        color: #2107c3;
+        border-radius: 12px;
+        padding: 20px 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        cursor: pointer;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease-in-out;
+      }
 
+      .card h1 {
+        font-size: 24px;
+        font-weight: bold;
+        text-transform: uppercase;
+        margin: 0;
+      }
+
+      .card p {
+        font-size: 18px;
+        line-height: 1.5;
+        font-style: italic;
+      }
+
+      .card:hover {
+        background-color: #2107c3;
+        color: #cfeaf2;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        transform: translateY(-5px);
+      }
+
+      .card h1:hover {
+        text-decoration: underline;
+      }
+
+      .card p:hover {
+        font-style: normal;
+        font-size: 20px;
+      }
+      p {
+        margin: 0%;
+        font-size: 18px;
+      }
+      h1 {
+        margin: 0%;
+        font-weight: bold;
+        font-size: 18px;
+        text-align: end;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="quotes">
+      <div class="heading">
+        <h1>Quotes</h1>
+      </div>
+    </div>
+
+    <script>
+      function fetchQuote() {
+        var url = "https://dummyjson.com/quotes";
+        fetch(url)
+          .then((response) => response.json())
+          .then((data) => {
+            const container = document.getElementById("quotes");
+
+            // Sabai quotes ko loop
+            data.quotes.forEach((q, index) => {
+              // Naya div for each card
+              const card = document.createElement("div");
+
+              card.className = "card";
+
+              card.innerHTML = `<p>"${q.quote}"</p> <h1> - ${q.author}</h1>`;
+
+              container.appendChild(card);
+            });
+          });
+      }
+
+      fetchQuote();
+    </script>
+  </body>
+</html>
